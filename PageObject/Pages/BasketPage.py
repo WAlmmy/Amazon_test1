@@ -34,7 +34,7 @@ class BasketPage(BasePage):
         quantity_select=self._get_quantity_select()
         print(quantity_select)
         
-        max_quantity=len(quantity_select.options)
+        max_quantity=len(quantity_select.options)-1
         print("found max quantity...")
         return max_quantity
 
