@@ -1,6 +1,7 @@
 from behave import given, when, then
 from selenium import webdriver
 from PageObject.Pages import *
+from utils import data_utils
 
 
 @given(u'the user\'s basket has 0 items in it')
@@ -40,9 +41,13 @@ def step_impl(context):
     item_num=context.homepage.get_cart_count()
     print(item_num)
     if item_num<1:
+        #Check and reset if Scenario 1 fails
         context.item.go_to_page()
-        quantity=context.item.get_max_quantity()
-        print("quantity: "+ str(quantity))
+        max_quantity=context.item.get_max_quantity()
+        new_amount=data_utils.get_random_item_num(min=1, max=max_quantity)
+        context.item.change_item_quantity(new_amount)
+        print("quantity: "+ str(new_amount))
+        context.item.add_item_to_cart()
         item_num=context.item.get_cart_count()
 
     print("item num: "+ str(item_num))

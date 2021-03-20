@@ -3,6 +3,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from PageObject.Pages.BasePage import BasePage
 from PageObject.Pages.HomePage import HomePage
 from PageObject.Pages.ItemPage import ItemPage
+from PageObject.Pages.BasketPage import BasketPage
 from utils import data_utils
 #import time
 
@@ -24,4 +25,5 @@ def before_all(context):
     context.homepage = HomePage(base_page)
     print("Home page")
     context.item = ItemPage(base_page, data_utils.get_random_element(item_list))
+    context.basket=BasketPage(base_page)
     
