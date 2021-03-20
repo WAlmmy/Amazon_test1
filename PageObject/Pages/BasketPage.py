@@ -13,6 +13,9 @@ class BasketPage(BasePage):
         self.context=context
 
     def change_item_quantity(self, amount):
+        """
+        changes number of items in item quantity dropdown
+        """
         #self.find_byXpath(item_quantity)
         quantity_select=self._get_quantity_select()
         print(quantity_select)
@@ -24,6 +27,9 @@ class BasketPage(BasePage):
         print("changed quantity")
     
     def get_max_quantity(self):
+        """
+        Returns max quantity in item quanitity dropdown
+        """
         print("getting max quantity...")
         quantity_select=self._get_quantity_select()
         print(quantity_select)
@@ -33,9 +39,17 @@ class BasketPage(BasePage):
         return max_quantity
 
     def get_item_quantity(self):
+        """
+        Returns an integer of the quantity of an item
+        """
         quantity_select=self._get_quantity_select()
         selected_option = quantity_select.first_selected_option
+        print("selected_option: " + str(selected_option))
+        print("text: "+selected_option.text)
         return int(selected_option.text)
     
     def _get_quantity_select(self):
+        """
+        returns a Select object of item quantity dropdown
+        """
         return Select(self.find_byXpath(self.basket_item_quantity))

@@ -2,6 +2,7 @@ from behave import given, when, then
 from selenium import webdriver
 from utils import data_utils
 from PageObject.Pages import *
+import time
 
 
 @given(u'a user is viewing their basket')
@@ -13,21 +14,26 @@ def step_impl(context):
 @when(u'the user changes the quantity of one of the items')
 def step_impl(context):
     #
-    context.initial_amount=context.basket.get_item_quantity()
-    print("initial_amount: "+str(context.initial_amount))
+    context.initial_item_amount=context.basket.get_item_quantity()
+    print("initial item amount: "+str(context.initial_item_amount))
 
-    max_quantity=context.basket.get_max_quantity()
-    print("max_quantitiy"+ str(max_quantity))
-    new_amount=context.initial_amount
-    print("new amount"+ str(new_amount))
+    context.initial_basket_amount=context.basket.get_cart_count()
+    print("initial basket amount: "+str(context.initial_basket_amount))
 
-    while new_amount==context.initial_amount:
-        new_amount=data_utils.get_random_item_num(min=1, max=max_quantity)
-        print("new amount"+ str(new_amount))
+    max_item_quantity=context.basket.get_max_quantity()
+    print("max item quantitiy "+ str(max_item_quantity))
+    context.new_item_amount=context.initial_item_amount
+    print("new item amount: "+ str(context.new_item_amount))
 
+    while context.new_item_amount==context.initial_item_amount:
+        context.new_item_amount=data_utils.get_random_item_num(min=1, max=max_item_quantity)
+        print("new item amount: "+ str(context.new_item_amount))
 
-    context.basket.change_item_quantity(new_amount)
-    print("quantity: "+ str(new_amount))
+    context.item_number_diff=context.new_item_amount-context.initial_item_amount
+    print("item number diff: "+ str(context.item_number_diff))
+
+    context.basket.change_item_quantity(context.new_item_amount)
+    print("item quantity: "+ str(context.item_number_diff))
 
 
     #raise NotImplementedError(u'STEP: When the user changes the quantity of one of the items')
@@ -35,14 +41,24 @@ def step_impl(context):
 
 @then(u'the item quantity changes accordingly')
 def step_impl(context):
-    item_num=context.item.get_cart_count()
-    assert item_num==context.initial_amount
+    print("checking item quantity...")
+    item_num=context.basket.get_item_quantity()
+    print("then: item quantity check: "+ str(item_num))
+    assert item_num==context.new_item_amount
     #raise NotImplementedError(u'STEP: Then the item quantity changes accordingly')
 
 
 @then(u'the overall number of items in the basket changes accordingly')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the overall number of items in the basket changes accordingly')
+    time.sleep(1)
+    basket_item_num=context.basket.get_cart_count()
+    print("then: basket quantity check: "+ str(basket_item_num))
+    calc_basket_total=context.initial_basket_amount+context.item_number_diff
+    print("calculated basket total "+ str(calc_basket_total))
+    print("Basket item num "+ str(basket_item_num))
+    
+    assert basket_item_num == calc_basket_total
+    #raise NotImplementedError(u'STEP: Then the overall number of items in the basket changes accordingly')
 
 
 @when(u'the user deletes an items')

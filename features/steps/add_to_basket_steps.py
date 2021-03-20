@@ -28,7 +28,7 @@ def step_impl(context):
 @then(u'the user\'s basket has 1 items in it')
 def step_impl(context):
     print("checking item count")
-    print(context.item.get_cart_count())
+    print("cart_count" + str(context.item.get_cart_count()))
     assert context.item.get_cart_count()==1
     print("after assert")
     #raise NotImplementedError(u'STEP: Then the user\'s basket has 1 items in it')
