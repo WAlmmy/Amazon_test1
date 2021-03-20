@@ -35,9 +35,23 @@ def step_impl(context):
 
 @given(u'the user\'s basket has at least 1 item')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the user\'s basket has at least 1 item')
+    print("in user has at least 1 item in basket...")
+    context.homepage.go_to_page()
+    item_num=context.homepage.get_cart_count()
+    print(item_num)
+    if item_num<1:
+        context.item.go_to_page()
+        quantity=context.item.get_max_quantity()
+        print("quantity: "+ str(quantity))
+        item_num=context.item.get_cart_count()
+
+    print("item num: "+ str(item_num))
+    context.start_num = item_num
+    assert item_num >= 1
+    #raise NotImplementedError(u'STEP: Given the user\'s basket has at least 1 item')
 
 
 @then(u'the user\'s basket has one more item in it')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the user\'s basket has one more item in it')
+    assert context.item.get_cart_count() == context.start_num+1
+    #raise NotImplementedError(u'STEP: Then the user\'s basket has one more item in it')

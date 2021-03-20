@@ -18,7 +18,7 @@ class BasePage(object):
     
     def go_to_page(self):
         print("going to: " + self.base_url)
-        self.context.driver.get(self.base_url)
+        self.driver.get(self.base_url)
     
     def get_cart_count(self):
         cart_count=self.find_byXpath(self.cart_count_span)
