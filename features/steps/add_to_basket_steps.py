@@ -1,10 +1,14 @@
 from behave import given, when, then
 from selenium import webdriver
+from PageObject.Pages import *
 
 
 @given(u'the user\'s basket has 0 items in it')
 def step_impl(context):
-    context.driver.get("https://www.amazon.co.uk/")
+    print("in initial scenario")
+    #context.driver.get("https://www.amazon.co.uk/")
+    page = context.homepage.go_to_page()
+    print("In amazon.co.uk")
     #assert 
     #raise NotImplementedError(u'STEP: Given the user\'s basket has 0 items in it')
 
