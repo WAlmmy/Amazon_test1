@@ -7,20 +7,30 @@ from PageObject.Pages import *
 def step_impl(context):
     print("in initial scenario")
     #context.driver.get("https://www.amazon.co.uk/")
-    page = context.homepage.go_to_page()
+    context.homepage.go_to_page()
     print("In amazon.co.uk")
+    print(context.homepage.get_cart_count())
+    assert context.homepage.get_cart_count()==0
     #assert 
     #raise NotImplementedError(u'STEP: Given the user\'s basket has 0 items in it')
 
 
 @when(u'the user adds the item to the basket')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When the user adds the item to the basket')
+    context.item.go_to_page()
+    print("in item page")
+    context.item.add_item_to_cart()
+
+    #raise NotImplementedError(u'STEP: When the user adds the item to the basket')
 
 
 @then(u'the user\'s basket has 1 items in it')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the user\'s basket has 1 items in it')
+    print("checking item count")
+    print(context.item.get_cart_count())
+    assert context.item.get_cart_count()==1
+    print("after assert")
+    #raise NotImplementedError(u'STEP: Then the user\'s basket has 1 items in it')
 
 
 @given(u'the user\'s basket has at least 1 item')
