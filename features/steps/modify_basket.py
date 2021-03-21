@@ -49,26 +49,14 @@ def step_impl(context):
     #raise NotImplementedError(u'STEP: Then the item quantity changes accordingly')
 
 
-@then(u'the overall number of items in the basket changes accordingly')
-def step_impl(context):
-    time.sleep(1)
-    basket_item_num=context.basket.get_cart_count()
-    print("then: basket quantity check: "+ str(basket_item_num))
-    calc_basket_total=context.initial_basket_amount+context.item_number_diff
-    print("calculated basket total "+ str(calc_basket_total))
-    print("Basket item num "+ str(basket_item_num))
-    
-    assert basket_item_num == calc_basket_total
-    #raise NotImplementedError(u'STEP: Then the overall number of items in the basket changes accordingly')
-
-
 @when(u'the user deletes an item')
 def step_impl(context):
     context.basket.save_item_list()
     context.item_to_delete=data_utils.get_random_element(context.basket.saved_item_list)
     print("length of saved list: " +str(len(context.basket.saved_item_list)))
     context.item_number_diff=context.basket.get_item_quantity(context.item_to_delete)*(-1)
-    context.initial_basket_amount=context.basket.get_cart_count()
+    context.initial_basket_amount = context.basket.get_cart_count()
+    print("initial cart count:" + str(context.initial_basket_amount))
     #context.selected_item_title=context.basket.get_existing_item_title(context.item_to_delete)
     #print(context.item_to_delete)
     context.selected_item_ID=context.basket.get_existing_item_product_ID(context.item_to_delete)
@@ -80,6 +68,20 @@ def step_impl(context):
     print("length of saved list: " +str(len(context.basket.saved_item_list)))
     
     #raise NotImplementedError(u'STEP: When the user deletes an items')
+
+
+@then(u'the overall number of items in the basket changes accordingly')
+def step_impl(context):
+    time.sleep(1)
+    basket_item_num=context.basket.get_cart_count()
+    print("then: basket quantity check: "+ str(basket_item_num))
+    print(context.initial_basket_amount)
+    calc_basket_total=context.initial_basket_amount+context.item_number_diff
+    print("calculated basket total "+ str(calc_basket_total))
+    print("Basket item num "+ str(basket_item_num))
+    
+    assert basket_item_num == calc_basket_total
+    #raise NotImplementedError(u'STEP: Then the overall number of items in the basket changes accordingly')
 
 
 @then(u'the item is no longer present in the basket')
@@ -97,14 +99,21 @@ def step_impl(context):
 
 @when(u'the user deletes all items')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When the user deletes all items')
+    item_list=context.basket.get_items_in_basket()
+    for item in item_list:
+        context.basket.delete_item(item)
+    #raise NotImplementedError(u'STEP: When the user deletes all items')
 
 
 @then(u'no items are present in the basket')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then no items are present in the basket')
+    assert context.basket.get_cart_count()==0
+    #raise NotImplementedError(u'STEP: Then no items are present in the basket')
 
 
 @then(u'a message saying the basket is empty is displayed')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then a message saying the basket is empty is displayed')
+    time.sleep(2)
+    message=context.basket.get_cart_empty_message()
+    assert "Your Amazon basket is empty" in message
+    #raise NotImplementedError(u'STEP: Then a message saying the basket is empty is displayed')

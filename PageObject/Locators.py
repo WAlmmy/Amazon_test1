@@ -18,4 +18,4 @@ class Locator(object):
     existing_basket_item_image="//img"
     removed_basket_item_span="//span[text()='was removed from Shopping Basket.']"
     all_anchors="//a[@href]"
-
+    cart_empty="//div[@class='a-row sc-your-amazon-cart-is-empty']"

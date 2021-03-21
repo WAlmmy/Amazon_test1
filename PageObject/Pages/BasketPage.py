@@ -18,6 +18,7 @@ class BasketPage(BasePage):
         self.existing_basket_item_title=Locator.existing_basket_item_title
         self.removed_basket_item_span=Locator.removed_basket_item_span
         self.all_anchors=Locator.all_anchors
+        self.cart_empty=Locator.cart_empty
         BasePage.__init__(self, context.driver, base_url="https://www.amazon.co.uk/gp/cart/view.html?ref_=nav_cart")
         self.context=context
 
@@ -135,3 +136,8 @@ class BasketPage(BasePage):
         print(removed_item_span.text)
         #print(removed_item_span)
         return removed_item_span
+
+    def get_cart_empty_message(self):
+        cart_empty_span=self.find_byXpath(self.cart_empty)
+        print(cart_empty_span.text)
+        return cart_empty_span.text

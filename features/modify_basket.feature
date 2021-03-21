@@ -17,4 +17,4 @@ Feature: As a user, I want to be see all items in my basket, so that I can modif
         When the user deletes all items
         Then no items are present in the basket
         And a message saying the basket is empty is displayed
-        And the overall number of items in the basket changes accordingly
+        
