@@ -4,7 +4,7 @@ import random
 def get_item_list(file):
     item_list = []
     with open(file, newline='') as csvfile:
-        item_reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        item_reader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for line in item_reader:
             item_list.append(line)
 

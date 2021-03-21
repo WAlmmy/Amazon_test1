@@ -14,7 +14,7 @@ def before_all(context):
 #    item_list = data_utils.get_item_list("ref/item_list.csv")
     item_list = data_utils.get_item_list(config("CSV_PATH"))
     print(item_list)
-    print("in before feature\n")
+    print("in before_all\n")
     #driver = webdriver.Chrome()
     driver_install_dir=ChromeDriverManager().install()
     driver = webdriver.Chrome(driver_install_dir)

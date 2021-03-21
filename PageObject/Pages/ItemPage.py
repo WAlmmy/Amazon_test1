@@ -10,12 +10,17 @@ class ItemPage(BasePage):
         self.item_quantity=Locator.item_quantity
         BasePage.__init__(self, context.driver, base_url=self.get_item_url())
         self.context=context
+        print("self.item_list: "+ str(self.item_list))
     
     def get_item_url(self):
-        return self.item_list[0]
+        item_url=self.item_list[0]
+        print("item_url: "+item_url)
+        return item_url
 
     def get_item_href(self):
-        return self.item_list[1]
+        item_href=self.item_list[1]
+        print("item_href: "+str(item_href))
+        return item_href
 
     def add_item_to_cart(self):
         btn=self.find_byXpath(self.add_to_cart_button)
