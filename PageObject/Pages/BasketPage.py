@@ -46,6 +46,7 @@ class BasketPage(BasePage):
         selected_option = quantity_select.first_selected_option
         print("selected_option: " + str(selected_option))
         print("text: "+selected_option.text)
+        print(type(selected_option.text))
         return int(selected_option.text)
     
     def _get_quantity_select(self):

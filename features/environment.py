@@ -14,7 +14,8 @@ def before_all(context):
     print(item_list)
     print("in before feature\n")
     #driver = webdriver.Chrome()
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver_install_dir=ChromeDriverManager().install()
+    driver = webdriver.Chrome(driver_install_dir)
     driver.maximize_window()
     #
     # time.sleep(1) #!!REMOVE!!
@@ -27,3 +28,6 @@ def before_all(context):
     context.item = ItemPage(base_page, data_utils.get_random_element(item_list))
     context.basket=BasketPage(base_page)
     
+def after_step(context, step):
+    if step.status == "failed":
+        print(context.scenario.name + " " + step.name)

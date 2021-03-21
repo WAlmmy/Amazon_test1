@@ -60,3 +60,14 @@ def step_impl(context):
 def step_impl(context):
     assert context.item.get_cart_count() == context.start_num+1
     #raise NotImplementedError(u'STEP: Then the user\'s basket has one more item in it')
+
+
+
+@when(u'the user adds an item X times to the basket')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: When the user adds an item X times to the basket')
+
+
+@then(u'the user\'s basket has X more item in it')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Then the user\'s basket has X more item in it')

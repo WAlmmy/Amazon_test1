@@ -25,7 +25,7 @@ def step_impl(context):
     context.new_item_amount=context.initial_item_amount
     print("new item amount: "+ str(context.new_item_amount))
 
-    while context.new_item_amount==context.initial_item_amount:
+    while context.new_item_amount==context.initial_item_amount or context.new_item_amount>9:
         context.new_item_amount=data_utils.get_random_item_num(min=1, max=max_item_quantity)
         print("new item amount: "+ str(context.new_item_amount))
 
