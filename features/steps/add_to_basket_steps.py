@@ -71,7 +71,9 @@ def step_impl(context, X_times):
     for i in range(0,X_times):
         print("context.initial_item_url: "+ context.initial_item_url)
         print("context.item.get_item_url: "+ context.item.get_item_url())
-        while context.initial_item_url==context.item.get_item_url:
+        while context.initial_item_url==context.item.get_item_url():
+            print("in while loop")
+            print("context.item.get_item_url: "+ context.item.get_item_url())
             context.item=ItemPage(context.base_page, data_utils.get_random_element(item_list))
         context.item.go_to_page()
         context.item.add_item_to_cart()
