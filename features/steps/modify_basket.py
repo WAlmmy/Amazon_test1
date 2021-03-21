@@ -66,21 +66,33 @@ def step_impl(context):
 def step_impl(context):
     context.basket.save_item_list()
     context.item_to_delete=data_utils.get_random_element(context.basket.saved_item_list)
-    print(context.item_to_delete)
+    print("length of saved list: " +str(len(context.basket.saved_item_list)))
+    context.item_number_diff=context.basket.get_item_quantity(context.item_to_delete)*(-1)
+    context.initial_basket_amount=context.basket.get_cart_count()
+    #context.selected_item_title=context.basket.get_existing_item_title(context.item_to_delete)
+    #print(context.item_to_delete)
+    context.selected_item_ID=context.basket.get_existing_item_product_ID(context.item_to_delete)
+    #context.deleted_href=
     context.basket.delete_item(context.item_to_delete)
     #time.sleep(2)
     #context.basket.go_to_page()
     print("length of current list: "+str(len(context.basket.get_items_in_basket())))
     print("length of saved list: " +str(len(context.basket.saved_item_list)))
     
-
     #raise NotImplementedError(u'STEP: When the user deletes an items')
 
 
 @then(u'the item is no longer present in the basket')
 def step_impl(context):
     #check span with class="a-size-base" contains "was removed from Shopping Basket." and a with class="a-link-normal sc-product-link" has href="/gp/product/1447223470/ref=ox_sc_act_title_delete_1?smid=A3P5ROKL5A1OLE&psc=1"
-    raise NotImplementedError(u'STEP: Then the item is no longer present in the basket')
+    #
+    #removed_item_title=context.basket.get_removed_item_title()
+    removed_item_ID=context.basket.get_removed_item_product_ID()
+    print(removed_item_ID)
+    #assert removed_item_title == context.selected_item_title
+    assert removed_item_ID == context.selected_item_ID
+
+    # raise NotImplementedError(u'STEP: Then the item is no longer present in the basket')
 
 
 @when(u'the user deletes all items')
