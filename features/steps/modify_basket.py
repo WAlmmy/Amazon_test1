@@ -62,7 +62,7 @@ def step_impl(context):
     #raise NotImplementedError(u'STEP: Then the overall number of items in the basket changes accordingly')
 
 
-@when(u'the user deletes an items')
+@when(u'the user deletes an item')
 def step_impl(context):
     raise NotImplementedError(u'STEP: When the user deletes an items')
 

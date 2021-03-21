@@ -15,3 +15,4 @@ def get_random_element(w_list):
 
 def get_random_item_num(min=1,max=30):
     return random.randint(min,max)
+

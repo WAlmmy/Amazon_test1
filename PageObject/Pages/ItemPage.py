@@ -14,6 +14,9 @@ class ItemPage(BasePage):
     def get_item_url(self):
         return self.item_list[0]
 
+    def get_item_href(self):
+        return self.item_list[1]
+
     def add_item_to_cart(self):
         btn=self.find_byXpath(self.add_to_cart_button)
         btn.click()

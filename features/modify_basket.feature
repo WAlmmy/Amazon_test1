@@ -8,7 +8,7 @@ Feature: As a user, I want to be see all items in my basket, so that I can modif
 
     Scenario: Delete item
         Given a user is viewing their basket
-        When the user deletes an items
+        When the user deletes an item
         Then the item is no longer present in the basket
         And the overall number of items in the basket changes accordingly
 
