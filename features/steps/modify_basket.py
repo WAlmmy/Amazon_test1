@@ -68,7 +68,8 @@ def step_impl(context):
     context.item_to_delete=data_utils.get_random_element(context.basket.saved_item_list)
     print(context.item_to_delete)
     context.basket.delete_item(context.item_to_delete)
-    time.sleep(2)
+    #time.sleep(2)
+    #context.basket.go_to_page()
     print("length of current list: "+str(len(context.basket.get_items_in_basket())))
     print("length of saved list: " +str(len(context.basket.saved_item_list)))
     
@@ -78,6 +79,7 @@ def step_impl(context):
 
 @then(u'the item is no longer present in the basket')
 def step_impl(context):
+    #check span with class="a-size-base" contains "was removed from Shopping Basket." and a with class="a-link-normal sc-product-link" has href="/gp/product/1447223470/ref=ox_sc_act_title_delete_1?smid=A3P5ROKL5A1OLE&psc=1"
     raise NotImplementedError(u'STEP: Then the item is no longer present in the basket')
 
 
