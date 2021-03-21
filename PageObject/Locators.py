@@ -7,5 +7,6 @@ class Locator(object):
     item_quantity="//select[@id='quantity']"
     #basket_item_quantity="//select[@name='quantity']"
     basket_item_quantity="//select[@class='a-native-dropdown a-declarative sc-update-quantity-select']"
-    basket_item="//a[@class='a-link-normal sc-product-link']"
+    #basket_item="//div[@class='a-link-normal sc-product-link']"
+    basket_item="//div[@data-quantity]"
     item_delete="//input[@value='Delete']"

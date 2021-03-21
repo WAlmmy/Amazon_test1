@@ -15,6 +15,7 @@ class BasePage(object):
     
     def find_byXpath(self,locator, element=None):
         if element is None:
+            print("default element driver")
             element=self.driver
         return element.find_element(By.XPATH, locator)
 

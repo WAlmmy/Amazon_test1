@@ -78,8 +78,9 @@ class BasketPage(BasePage):
         return self.find_all_byXpath(self.basket_item)
 
     def delete_item(self,element):
-        self.find_byXpath(self.item_delete,element=element)
-        ActionChains(self.driver).click(element).perform()
+        item_delete_button=self.find_byXpath(self.item_delete,element=element)
+        #ActionChains(self.driver).click(element).perform()
+        item_delete_button.click()
 
     def _get_item_name(self):
         pass

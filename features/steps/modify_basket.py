@@ -66,6 +66,9 @@ def step_impl(context):
 def step_impl(context):
     context.basket.save_item_list()
     context.item_to_delete=data_utils.get_random_element(context.basket.saved_item_list)
+    print(context.item_to_delete)
+    context.basket.delete_item(context.item_to_delete)
+    time.sleep(2)
     print("length of current list: "+str(len(context.basket.get_items_in_basket())))
     print("length of saved list: " +str(len(context.basket.saved_item_list)))
     
