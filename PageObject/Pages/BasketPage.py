@@ -9,13 +9,20 @@ class BasketPage(BasePage):
     def __init__(self, context):
         self.add_to_cart_button=Locator.add_to_cart_button
         self.basket_item_quantity=Locator.basket_item_quantity
+        self.basket_item=Locator.basket_item
         BasePage.__init__(self, context.driver, base_url="https://www.amazon.co.uk/gp/cart/view.html?ref_=nav_cart")
         self.context=context
 
-    def change_item_quantity(self, amount):
+    def save_item_list(self):
+        self.saved_item_list=self._get_items_in_basket()
+        
+
+    def change_item_quantity(self, amount, element=None):
         """
         changes number of items in item quantity dropdown
         """
+        if element is None:
+            element=self.driver
         #self.find_byXpath(item_quantity)
         quantity_select=self._get_quantity_select()
         print(quantity_select)
@@ -54,3 +61,13 @@ class BasketPage(BasePage):
         returns a Select object of item quantity dropdown
         """
         return Select(self.find_byXpath(self.basket_item_quantity))
+
+    def _get_items_in_basket(self):
+        """
+        returns a list of items in basket
+        """
+        return Select(self.find_byXpath(self.basket_item))
+
+    def _get_item_name(self):
+        pass
+

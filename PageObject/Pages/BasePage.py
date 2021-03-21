@@ -13,8 +13,10 @@ class BasePage(object):
         #self.driver.implicitly_wait(10)
         #self.cart_count_span = driver.find_element(By.XPATH, Locator.cart_count_span)
     
-    def find_byXpath(self,locator):
-        return self.driver.find_element(By.XPATH, locator)
+    def find_byXpath(self,locator, element=None):
+        if element is None:
+            element=self.driver
+        return element.find_element(By.XPATH, locator)
     
     def go_to_page(self):
         print("going to: " + self.base_url)
