@@ -64,7 +64,13 @@ def step_impl(context):
 
 @when(u'the user deletes an item')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When the user deletes an items')
+    context.basket.save_item_list()
+    context.item_to_delete=data_utils.get_random_element(context.basket.saved_item_list)
+    print("length of current list: "+str(len(context.basket.get_items_in_basket())))
+    print("length of saved list: " +str(len(context.basket.saved_item_list)))
+    time.sleep(3)
+
+    #raise NotImplementedError(u'STEP: When the user deletes an items')
 
 
 @then(u'the item is no longer present in the basket')

@@ -17,6 +17,11 @@ class BasePage(object):
         if element is None:
             element=self.driver
         return element.find_element(By.XPATH, locator)
+
+    def find_all_byXpath(self,locator, element=None):
+        if element is None:
+            element=self.driver
+        return element.find_elements(By.XPATH, locator)
     
     def go_to_page(self):
         print("going to: " + self.base_url)
