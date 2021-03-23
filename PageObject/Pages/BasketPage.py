@@ -86,32 +86,22 @@ class BasketPage(BasePage):
 
     def delete_item(self,element):
         item_delete_button=self.find_byXpath(self.item_delete,element=element)
-        #ActionChains(self.driver).click(element).perform()
         item_delete_button.click()
 
     def get_removed_item_title(self, element=None):
         if element is None:
             element=self.driver
-        #basket_item=self.find_byXpath(self.item_removed_message,element)
         removed_item_span=self.get_removed_item_span(element)
-        print(removed_item_span.text)
-        #item_title=self.find_byXpath(self.removed_basket_item_title,basket_item).getAttribute("alt")
         removed_item_title=self.find_byXpath(self.get_removed_item_span,removed_item_span).get_attribute("text")
-        print(removed_item_title)
         return removed_item_title
     
     def get_removed_item_product_ID(self, element=None):
         if element is None:
             element=self.driver
         removed_item_span=self.get_removed_item_span(element)
-        #item_href=self.find_byXpath(self.removed_basket_item_title,removed_item_span).get_element("href")
-        #removed_item_anchor=self.find_byXpath(self.all_anchors,removed_item_span)
-        #locator doesn't work. Temporariliy using find element by tag name
         removed_item_anchor=removed_item_span.find_element_by_tag_name("a")
         item_href=removed_item_anchor.get_attribute("href")
-        print(item_href)
         product_ID= data_utils.get_product_id_from_href(item_href)
-        print(product_ID)
         return product_ID
 
     def get_existing_item_product_ID(self,element=None):
@@ -119,11 +109,9 @@ class BasketPage(BasePage):
             element=self.driver
         item_href=self.find_byXpath(self.existing_basket_item_title,element).get_attribute("href")
         product_ID= data_utils.get_product_id_from_href(item_href)
-        print(product_ID)
         return product_ID
 
     def get_existing_item_title(self, element):
-        print("getting existing item title...")
         item_title=self.find_byXpath(self.all_anchors,element).get_attribute("alt")
         print(item_title)
         return item_title
@@ -131,10 +119,8 @@ class BasketPage(BasePage):
     def get_removed_item_span(self,element=None):
         if element is None:
             element=self.driver
-        print("getting removed item span...")
         removed_item_span=self.find_byXpath(self.removed_basket_item_span, element)
         print(removed_item_span.text)
-        #print(removed_item_span)
         return removed_item_span
 
     def get_cart_empty_message(self):

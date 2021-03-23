@@ -10,16 +10,13 @@ class ItemPage(BasePage):
         self.item_quantity=Locator.item_quantity
         BasePage.__init__(self, context.driver, base_url=self.get_item_url())
         self.context=context
-        print("self.item_list: "+ str(self.item_list))
     
     def get_item_url(self):
         item_url=self.item_list[0]
-        print("item_url: "+item_url)
         return item_url
 
     def get_item_href(self):
         item_href=self.item_list[1]
-        print("item_href: "+str(item_href))
         return item_href
 
     def add_item_to_cart(self):
@@ -27,19 +24,12 @@ class ItemPage(BasePage):
         btn.click()
 
     def change_item_quantity(self, amount):
-        #self.find_byXpath(item_quantity)
         quantity_select=self._get_quantity_select()
-        print(quantity_select)
         quantity_select.select_by_value(str(amount))
-        print("changed quantity")
     
     def get_max_quantity(self):
-        print("getting max quantity...")
         quantity_select=self._get_quantity_select()
-        print(quantity_select)
-        
         max_quantity=len(quantity_select.options)
-        print("found max quantity...")
         return max_quantity
     
     def _get_quantity_select(self):

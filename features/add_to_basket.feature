@@ -17,5 +17,4 @@ Feature: As a user, I want to add an item I like, so that I can purchase it late
 
         Examples: X_times
         | X_times    |
-        | 1          |
-        | 4          |
+        | 3          |
