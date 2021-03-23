@@ -52,7 +52,7 @@ def step_impl(context):
         context.start_cart_count=context.item.get_cart_count()
 
     print("context.start_cart_count: "+ str(context.start_cart_count))
-    context.start_cart_count
+    
     assert context.start_cart_count >= 1
     #raise NotImplementedError(u'STEP: Given the user\'s basket has at least 1 item')
 
@@ -77,7 +77,6 @@ def step_impl(context, X_times):
             context.item=ItemPage(context.base_page, data_utils.get_random_element(item_list))
         context.item.go_to_page()
         context.item.add_item_to_cart()
-    #raise NotImplementedError(u'STEP: When the user adds an item X times to the basket')
 
 
 @then(u'the user\'s basket has {X_times} more items in it')
@@ -89,4 +88,4 @@ def step_impl(context,X_times):
     current_cart_count=context.item.get_cart_count()
     print("current_cart_count: "+str(current_cart_count))
     assert current_cart_count==context.start_cart_count+X_times
-    #raise NotImplementedError(u'STEP: Then the user\'s basket has X more item in it')
+    context.start_cart_count=context.item.get_cart_count()
